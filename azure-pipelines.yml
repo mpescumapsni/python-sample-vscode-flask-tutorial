@@ -6,9 +6,22 @@
 trigger:
 - master
 
-pool:
+#pool:
 #  vmImage: ubuntu-latest
-   vmImage: "windows-latest"
+#   vmImage: "windows-latest"
+strategy:
+  matrix:
+    linux:
+      imageName: "ubuntu-latest"
+    mac:
+      imageName: "macOS-latest"
+    windows:
+      imageName: "windows-latest"
+  maxParallel: 3
+
+pool:
+  vmImage: $(imageName)
+
 
 steps:
 - script: echo Hello, world!
