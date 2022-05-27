@@ -7,7 +7,8 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+#  vmImage: ubuntu-latest
+   vmImage: "windows-latest"
 
 steps:
 - script: echo Hello, world!
@@ -17,3 +18,10 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: "JaCoCo"
+    summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/site/jacoco/jacoco.xml"
+    reportDirectory: "$(System.DefaultWorkingDirectory)/**/site/jacoco"
+    failIfCoverageEmpty: true
